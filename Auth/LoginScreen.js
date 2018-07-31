@@ -14,19 +14,49 @@ import {
 import SvgUri from 'react-native-svg-uri';
 import styles from './Style';
 import { KeyboardAvoidingView } from 'react-native';
+import * as firebase from 'firebase'
+
+
+const firebaseConfig = {
+    apiKey: 'AIzaSyAa6Sf-V1938UWYwtDW6iLOubUxJ9Y4FJ8',
+    authDomain: 'donorapp-dc0b7.firebaseapp.com',
+    databaseURL: 'https://donorapp-dc0b7.firebaseio.com/',
+    projectId: 'donorapp-dc0b7',
+    storageBucket: 'donorapp-dc0b7.appspot.com',
+    messagingSenderId: '386131022415'
+}
+
+firebase.initializeApp(firebaseConfig)
 
 export default class LoginScreen extends React.Component{
 
     state = {
-        username: '',
+        email: '',
         password: '',
     }
 
-    handleChangeUsername = (username) => {
-        this.setState({username})
+    handleChangeUsername = (email) => {
+        this.setState({email})
     }
     handleChangePassword = (password) => {
         this.setState({password})
+    }
+
+    signUpUser = (email, password) => {
+
+    }
+
+    loginUser = (email, password) => {
+        console.log(email)
+        console.log(password)
+        try {
+            firebase.auth().signInWithEmailAndPassword(email, password).then(function(user) {
+                console.log("Success")
+            })
+            this.props.navigation.navigate("Main")
+        }catch(error) {
+            console.log(error.toString())
+        }
     }
 
 
@@ -66,11 +96,12 @@ export default class LoginScreen extends React.Component{
                             />
                         </View>
                         <View style={styles.rectangleTwo}>
-                            <TextInput  placeholder={"Имя пользователя"} 
+                            <TextInput  placeholder={"Email"} 
                                         style={styles.textinput}
                                         placeholderTextColor="white"
-                                        value={this.state.username}
+                                        value={this.state.email}
                                         onChangeText={this.handleChangeUsername}
+                                        underlineColorAndroid='transparent'
                             />
                         </View>    
                     </View> 
@@ -90,6 +121,7 @@ export default class LoginScreen extends React.Component{
                                         value={this.state.password}
                                         onChangeText={this.handleChangePassword}
                                         secureTextEntry
+                                        underlineColorAndroid='transparent'
                             />
                         </View>     
                     </View>  
@@ -99,11 +131,14 @@ export default class LoginScreen extends React.Component{
                      <View style={styles.buttonView}>
                         <TouchableOpacity 
                             style={styles.button}
-                        >
+                            onPress={() => this.loginUser(this.state.email, this.state.password)}
+                         >
                             <Text style={styles.buttonText}>Войти</Text>        
                         </TouchableOpacity>
                         <Text style={styles.noAccount} 
-                            onPress={()=> this.props.navigation.navigate("Registration")}>
+                            onPress={()=> this.props.navigation.navigate("Registration", {
+                                firebase: firebase
+                            })}>
                                 Нет учетной записи?
                         </Text>
                     </View>

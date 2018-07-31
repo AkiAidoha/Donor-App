@@ -22,9 +22,13 @@ const Style = StyleSheet.create({
        borderBottomLeftRadius: 20,
        borderTopLeftRadius: 20       
     },
+    whiteText: {
+        color: '#ffffff',
+    },
     textinput:{
         paddingLeft: 20,
-        color: '#fff'
+        color: '#fff',
+       width: '100%',
     },
     rectangleTwo:{
         backgroundColor:'#2CC7B8',
@@ -54,20 +58,21 @@ const Style = StyleSheet.create({
     buttonText:{
         color:'white',
         textAlign:'center',
-        fontFamily: 'Avenir Next',
         fontSize: 20
     },
     noAccount:{
         textAlign: 'right',
         alignSelf:'stretch',
         marginRight: 25,
-        marginTop: 10
+        marginTop: 10,
+        color: '#ffffff',
     },
     forgotPassword:{
         textAlign: 'right',
         alignSelf:'stretch',
         marginRight: 25,
-        marginTop: 10
+        marginTop: 10,
+        color: '#ffffff',
     },
     inputs: {
         marginTop: 100

@@ -9,5 +9,4 @@ export default createSwitchNavigator({
   Login: LoginScreen,
   Registration: RegistrationScreen,
   Main: MainTabNavigator,
-
 });

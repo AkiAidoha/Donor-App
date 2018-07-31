@@ -16,11 +16,14 @@ import DatePicker from 'react-native-datepicker';
 import styles from './Style';
 import { KeyboardAvoidingView } from 'react-native';
 
+
+
+
 export default class RegistrationScreen extends React.Component{
     
 
     state = {
-        username: '',
+        email: '',
         password: '',
         bdate: '',
         height: '',
@@ -28,8 +31,12 @@ export default class RegistrationScreen extends React.Component{
         city: ''
     }
 
-    handleChangeUsername = (username) => {
-        this.setState({username})
+     
+     firebase = this.props.navigation.getParam('firebase')
+
+
+    handleChangeUsername = (email) => {
+        this.setState({email})
     }
     handleChangePassword = (password) => {
         this.setState({password})
@@ -45,6 +52,17 @@ export default class RegistrationScreen extends React.Component{
     }
     handleCity = (city) => {
         this.setState({city})
+    }
+
+    signUpUser = (email, password) => {
+
+        try{ 
+            this.firebase.auth().createUserWithEmailAndPassword(email, password)
+            this.props.navigation.navigate("Login")
+        }catch(err) {
+            console.log(err)
+        }
+    
     }
 
 
@@ -76,11 +94,12 @@ export default class RegistrationScreen extends React.Component{
                             />
                         </View>
                         <View style={styles.rectangleTwo}>
-                            <TextInput  placeholder={"Имя пользователя"} 
+                            <TextInput  placeholder={"Email"} 
                                         style={styles.textinput}
                                         placeholderTextColor="white"
-                                        value={this.state.username}
+                                        value={this.state.email}
                                         onChangeText={this.handleChangeUsername}
+                                        underlineColorAndroid='transparent'
                             />
                         </View>    
                     </View> 
@@ -100,6 +119,7 @@ export default class RegistrationScreen extends React.Component{
                                         value={this.state.password}
                                         onChangeText={this.handleChangePassword}
                                         secureTextEntry
+                                        underlineColorAndroid='transparent'
                             />
                         </View> 
                     </View>  
@@ -149,6 +169,7 @@ export default class RegistrationScreen extends React.Component{
                                         placeholderTextColor="white"
                                         value={this.state.height}
                                         onChangeText={this.handleHeight}
+                                        underlineColorAndroid='transparent'
                             /> 
                         </View> 
                     </View>
@@ -168,6 +189,7 @@ export default class RegistrationScreen extends React.Component{
                                         placeholderTextColor="white"
                                         value={this.state.weight}
                                         onChangeText={this.handleWeight}
+                                        underlineColorAndroid='transparent'
                             /> 
                         </View> 
                     </View>
@@ -186,6 +208,7 @@ export default class RegistrationScreen extends React.Component{
                                         placeholderTextColor="white"
                                         value={this.state.city}
                                         onChangeText={this.handleCity}
+                                        underlineColorAndroid='transparent'
                             /> 
                         </View> 
                     </View>
@@ -193,6 +216,7 @@ export default class RegistrationScreen extends React.Component{
                      <View style={styles.buttonView}>
                         <TouchableOpacity 
                             style={styles.button}
+                            onPress={() => this.signUpUser(this.state.email, this.state.password)}
                         >
                             <Text style={styles.buttonText}>Зарегистрироваться</Text>        
                         </TouchableOpacity>
