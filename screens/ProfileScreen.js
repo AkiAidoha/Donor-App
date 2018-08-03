@@ -9,29 +9,17 @@ import {
     Keyboard, 
     ScrollView,
     Switch,
-    StyleSheet
+    StyleSheet,
+    Alert
 } from 'react-native';
 import styles from './Style';
 import SvgUri from 'react-native-svg-uri';
 import DatePicker from 'react-native-datepicker';
 import { KeyboardAvoidingView } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
-import * as firebase from 'firebase';
+import firebase from '../FireBase/FireBase'
 
 
-const firebaseConfig = {
-    apiKey: "AIzaSyAa6Sf-V1938UWYwtDW6iLOubUxJ9Y4FJ8",
-    authDomain: "donorapp-dc0b7.firebaseapp.com",
-    databaseURL: "https://donorapp-dc0b7.firebaseio.com",
-    projectId: "donorapp-dc0b7",
-    storageBucket: "donorapp-dc0b7.appspot.com",
-    messagingSenderId: "386131022415"
-}
-
-firebase.initializeApp(firebaseConfig);
-
-const rootRef = firebase.database().ref();
-const personRef = rootRef.child('persons');
 
 export default class ProfileScreen extends React.Component {
     
@@ -175,6 +163,7 @@ export default class ProfileScreen extends React.Component {
         this.setState({name})
     }
 
+    /*
     onPressAddPerson = () => {
         if(this.state.name.trim() === ''){
             alert("name is empty");
@@ -202,7 +191,19 @@ export default class ProfileScreen extends React.Component {
         });
     }
 
+*/
 
+     writeUserData = () => {
+         const database = firebase.database()
+         const userRef = database.ref('users/')
+             let result = userRef.push({
+             username: this.state.name,
+             height: this.state.height,
+             weight: this.state.weight,
+             dob: this.state.bdate
+         })
+         Alert.alert("SUCCESS")
+    }
 
     render() {
 
@@ -372,8 +373,8 @@ export default class ProfileScreen extends React.Component {
                                 <View style={styles.submitView}>
                                     <TouchableOpacity 
                                         style={styles.submit}
-                                        onPress={this.onPressAddPerson}
-                                        >
+                                        onPress={() => this.writeUserData()}
+                                    >
                                         <Text style={styles.buttonText}>Изменить</Text>        
                                     </TouchableOpacity>
                                 </View>

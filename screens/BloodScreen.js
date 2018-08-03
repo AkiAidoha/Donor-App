@@ -228,7 +228,7 @@ export default class BloodScreen extends React.Component {
                                 label: 'Выберите компонент',
                                 value: null,
                             }}
-                            
+
                             items={this.state.items}
                             onValueChange={(value) => {
                                 this.setState({
@@ -241,10 +241,10 @@ export default class BloodScreen extends React.Component {
                                 this.inputRefs.picker = el;
                             }}
                         />
-                    </View> 
-                </View> 
+                    </View>
+                </View>
 
-                
+
                 <View style={styles.inputRectangle}>
                     <View style={styles.rectangleOne}>
                         <SvgUri
@@ -254,7 +254,7 @@ export default class BloodScreen extends React.Component {
                         />
                     </View>
                     <View style={styles.rectangleTwo}>
-                        <TextInput  placeholder={"Объем, мл"} 
+                        <TextInput  placeholder={"Объем, мл"}
                                     keyboardType = 'numeric'
                                     maxLength = {5}
                                     style={styles.textinput}
@@ -263,10 +263,10 @@ export default class BloodScreen extends React.Component {
                                     onChangeText={this.handleChangeValue}
                                     underlineColorAndroid='transparent'
                         />
-                    </View> 
-                </View> 
+                    </View>
+                </View>
 
-                
+
                 <View style={styles.inputRectangle}>
                     <View style={styles.rectangleOne}>
                         <SvgUri
@@ -281,7 +281,7 @@ export default class BloodScreen extends React.Component {
                                 label: 'Ваш город',
                                 value: null,
                             }}
-                            
+
                             items={this.state.items2}
                             onValueChange={(value) => {
                                 this.setState({
@@ -294,8 +294,8 @@ export default class BloodScreen extends React.Component {
                                 this.inputRefs.picker2 = el;
                             }}
                         />
-                    </View> 
-                </View> 
+                    </View>
+                </View>
 
 
                 <View style={styles.questionView}>
@@ -414,7 +414,6 @@ const pickerSelectStyles = {
         paddingBottom: 12,
         borderBottomRightRadius: 20,
         borderTopRightRadius: 20,
-        color: 'white',
         paddingLeft: 20
     },
     placeholderColor: 'white',

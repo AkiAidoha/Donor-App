@@ -16,19 +16,7 @@ import {
 import SvgUri from 'react-native-svg-uri';
 import styles from './Style';
 import { KeyboardAvoidingView } from 'react-native';
-// import * as firebase from 'firebase';
-
-
-// const firebaseConfig = {
-//     apiKey: "AIzaSyAa6Sf-V1938UWYwtDW6iLOubUxJ9Y4FJ8",
-//     authDomain: "donorapp-dc0b7.firebaseapp.com",
-//     databaseURL: "https://donorapp-dc0b7.firebaseio.com",
-//     projectId: "donorapp-dc0b7",
-//     storageBucket: "donorapp-dc0b7.appspot.com",
-//     messagingSenderId: "386131022415"
-// }
-
-// firebase.initializeApp(firebaseConfig);
+import firebase from '../FireBase/FireBase'
 
 export default class LoginScreen extends React.Component{
 
@@ -45,18 +33,18 @@ export default class LoginScreen extends React.Component{
     }
 
 
-    // loginUser = (email, password) => {
-    //     console.log(email)
-    //     console.log(password)
-    //     try {
-    //         firebase.auth().signInWithEmailAndPassword(email, password).then(function(user) {
-    //             console.log("Success")
-    //         })
-    //         this.props.navigation.navigate("Main")
-    //     }catch(error) {
-    //         console.log(error.toString())
-    //     }
-    // }
+    loginUser = (email, password) => {
+        console.log(email)
+        console.log(password)
+        try {
+            firebase.auth().signInWithEmailAndPassword(email, password).then(function(user) {
+                console.log("Success")
+            })
+            this.props.navigation.navigate("Main")
+        }catch(error) {
+            console.log(error.toString())
+        }
+    }
 
 
     render(){
@@ -66,7 +54,6 @@ export default class LoginScreen extends React.Component{
             <View style={styles.container}>
                 <ImageBackground
                     style={{
-                    backgroundColor: '#ccc',
                     flex: 1,
                     position: 'absolute',
                     width: '100%',
@@ -136,9 +123,7 @@ export default class LoginScreen extends React.Component{
                             <Text style={styles.buttonText}>Войти</Text>        
                         </TouchableOpacity>
                         <Text style={styles.noAccount} 
-                            onPress={()=> this.props.navigation.navigate("Registration", {
-                                firebase: firebase
-                            })}>
+                            onPress={()=> this.props.navigation.navigate("Registration")}>
                                 Нет учетной записи?
                         </Text>
                     </View>

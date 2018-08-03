@@ -17,6 +17,7 @@ import SvgUri from 'react-native-svg-uri';
 import DatePicker from 'react-native-datepicker';
 import styles from './Style';
 import { KeyboardAvoidingView } from 'react-native';
+import firebase from '../FireBase/FireBase'
 
 
 export default class RegistrationScreen extends React.Component{
@@ -27,8 +28,7 @@ export default class RegistrationScreen extends React.Component{
         password: '',
     }
 
-     
-    // firebase = this.props.navigation.getParam('firebase')
+
 
 
     handleChangeUsername = (email) => {
@@ -38,16 +38,16 @@ export default class RegistrationScreen extends React.Component{
         this.setState({password})
     }
 
-    // signUpUser = (email, password) => {
+    signUpUser = (email, password) => {
 
-    //     try{ 
-    //         this.firebase.auth().createUserWithEmailAndPassword(email, password)
-    //         this.props.navigation.navigate("Login")
-    //     }catch(err) {
-    //         console.log(err)
-    //     }
+        try{
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+            this.props.navigation.navigate("Login")
+        }catch(err) {
+            console.log(err)
+        }
     
-    // }
+    }
 
 
     render(){
@@ -57,7 +57,6 @@ export default class RegistrationScreen extends React.Component{
             <View style={styles.container}>
                     <ImageBackground
                         style={{
-                        backgroundColor: '#ccc',
                         flex: 1,
                         position: 'absolute',
                         width: '100%',
