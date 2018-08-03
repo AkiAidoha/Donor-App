@@ -5,6 +5,7 @@ const Style = StyleSheet.create({
         flex: 1,
         justifyContent: 'center', 
         alignItems: 'center',
+        backgroundColor: '#fff',
     },
     inputRectangle:{ 
         justifyContent: 'center', 
@@ -84,6 +85,9 @@ const Style = StyleSheet.create({
     absolute: {
         position: "absolute",
         top: 0, left: 0, bottom: 0, right: 0,
+    },
+    checkboxes:{
+        marginTop: 30
     },
 });
 

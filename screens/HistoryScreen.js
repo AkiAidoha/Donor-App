@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, StyleSheet,StatusBar } from 'react-native';
+import { View, StyleSheet,StatusBar, ScrollView } from 'react-native';
+import styles from './Style'
+
 
 export default class HistoryScreen extends React.Component {
     static navigationOptions = {
@@ -9,19 +11,23 @@ export default class HistoryScreen extends React.Component {
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
-        fontFamily: 'Avenir Next',
+        // fontFamily: 'Avenir Next',
         fontWeight: '500'
         },
     };
 
     render() {
         return (
-            <View>
-                <StatusBar
-                    backgroundColor="white"
-                    barStyle="light-content"
-                />
-            </View>
+            <ScrollView>
+                <View style={styles.container}>
+                    <StatusBar
+                        backgroundColor="white"
+                        barStyle="light-content"
+                    />
+                    
+
+                </View>
+            </ScrollView>
         );
     }
 }

@@ -18,7 +18,7 @@ export default class NewsScreen extends React.Component {
     },
     headerTintColor: '#fff',
     headerTitleStyle: {
-      fontFamily: 'Avenir Next',
+      // fontFamily: 'Avenir Next',
       fontWeight: '500'
     },
   };

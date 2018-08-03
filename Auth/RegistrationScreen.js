@@ -8,7 +8,9 @@ import {
     StyleSheet, 
     View,
     ImageBackground,
-    StatusBar
+    StatusBar,
+    TouchableWithoutFeedback,
+    Keyboard
 } from 'react-native';
 
 import SvgUri from 'react-native-svg-uri';
@@ -17,22 +19,16 @@ import styles from './Style';
 import { KeyboardAvoidingView } from 'react-native';
 
 
-
-
 export default class RegistrationScreen extends React.Component{
     
 
     state = {
         email: '',
         password: '',
-        bdate: '',
-        height: '',
-        weight: '',
-        city: ''
     }
 
      
-     firebase = this.props.navigation.getParam('firebase')
+    // firebase = this.props.navigation.getParam('firebase')
 
 
     handleChangeUsername = (email) => {
@@ -41,35 +37,23 @@ export default class RegistrationScreen extends React.Component{
     handleChangePassword = (password) => {
         this.setState({password})
     }
-    handleDate = (bdate) => {
-        this.setState({bdate})
-    }
-    handleHeight = (height) =>{
-        this.setState({height})
-    }
-    handleWeight = (weight) => {
-        this.setState({weight})
-    }
-    handleCity = (city) => {
-        this.setState({city})
-    }
 
-    signUpUser = (email, password) => {
+    // signUpUser = (email, password) => {
 
-        try{ 
-            this.firebase.auth().createUserWithEmailAndPassword(email, password)
-            this.props.navigation.navigate("Login")
-        }catch(err) {
-            console.log(err)
-        }
+    //     try{ 
+    //         this.firebase.auth().createUserWithEmailAndPassword(email, password)
+    //         this.props.navigation.navigate("Login")
+    //     }catch(err) {
+    //         console.log(err)
+    //     }
     
-    }
+    // }
 
 
     render(){
         return(
         <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-    
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}> 
             <View style={styles.container}>
                     <ImageBackground
                         style={{
@@ -124,95 +108,6 @@ export default class RegistrationScreen extends React.Component{
                         </View> 
                     </View>  
 
-                    <View style={styles.inputRectangle}>
-                        <View style={styles.rectangleOne}>
-                            <SvgUri
-                                width="30"
-                                height="30"
-                                source={require('../assets/images/calendar.svg')}
-                            />
-                        </View>
-                        <View style={styles.rectangleTwo}>
-                            <DatePicker
-                                date={this.state.bdate}
-                                mode="date"
-                                placeholder="Дата рождения"
-                                format="YYYY-MM-DD"
-                                showIcon = {false}
-                                customStyles={{
-                                    dateInput:{
-                                        borderWidth: 0,
-                                    },
-                                    placeholderText: {
-                                        fontSize: 14,
-                                        color: 'white',
-                                    }
-                                }}
-                                confirmBtnText="Подтвердить"
-                                cancelBtnText="Отмена"
-                                onDateChange={this.handleDate}
-                            />
-                        </View> 
-                    </View> 
-
-                    <View style={styles.inputRectangle}>
-                        <View style={styles.rectangleOne}>
-                            <SvgUri
-                                width="30"
-                                height="30"
-                                source={require('../assets/images/height.svg')}
-                            />
-                        </View>
-                        <View style={styles.rectangleTwo}>
-                            <TextInput  placeholder={"Рост, см"} 
-                                        style={styles.textinput}
-                                        placeholderTextColor="white"
-                                        value={this.state.height}
-                                        onChangeText={this.handleHeight}
-                                        underlineColorAndroid='transparent'
-                            /> 
-                        </View> 
-                    </View>
-
-
-                    <View style={styles.inputRectangle}>
-                        <View style={styles.rectangleOne}>
-                            <SvgUri
-                                width="30"
-                                height="30"
-                                source={require('../assets/images/weighing.svg')}
-                            />
-                        </View>
-                        <View style={styles.rectangleTwo}>
-                            <TextInput  placeholder={"Вес, кг"} 
-                                        style={styles.textinput}
-                                        placeholderTextColor="white"
-                                        value={this.state.weight}
-                                        onChangeText={this.handleWeight}
-                                        underlineColorAndroid='transparent'
-                            /> 
-                        </View> 
-                    </View>
-
-                    <View style={styles.inputRectangle}>
-                        <View style={styles.rectangleOne}>
-                            <SvgUri
-                                width="30"
-                                height="30"
-                                source={require('../assets/images/enterprise.svg')}
-                            />
-                        </View>
-                        <View style={styles.rectangleTwo}>
-                            <TextInput  placeholder={"Город"} 
-                                        style={styles.textinput}
-                                        placeholderTextColor="white"
-                                        value={this.state.city}
-                                        onChangeText={this.handleCity}
-                                        underlineColorAndroid='transparent'
-                            /> 
-                        </View> 
-                    </View>
-
                      <View style={styles.buttonView}>
                         <TouchableOpacity 
                             style={styles.button}
@@ -229,6 +124,7 @@ export default class RegistrationScreen extends React.Component{
                 </View>
                 </ImageBackground>    
             </View>
+          </TouchableWithoutFeedback>  
         </KeyboardAvoidingView>
         );
     }

@@ -8,25 +8,27 @@ import {
     StyleSheet, 
     ImageBackground,
     View,
-    StatusBar
+    StatusBar,
+    TouchableWithoutFeedback,
+    Keyboard
 } from 'react-native';
 
 import SvgUri from 'react-native-svg-uri';
 import styles from './Style';
 import { KeyboardAvoidingView } from 'react-native';
-import * as firebase from 'firebase'
+// import * as firebase from 'firebase';
 
 
-const firebaseConfig = {
-    apiKey: 'AIzaSyAa6Sf-V1938UWYwtDW6iLOubUxJ9Y4FJ8',
-    authDomain: 'donorapp-dc0b7.firebaseapp.com',
-    databaseURL: 'https://donorapp-dc0b7.firebaseio.com/',
-    projectId: 'donorapp-dc0b7',
-    storageBucket: 'donorapp-dc0b7.appspot.com',
-    messagingSenderId: '386131022415'
-}
+// const firebaseConfig = {
+//     apiKey: "AIzaSyAa6Sf-V1938UWYwtDW6iLOubUxJ9Y4FJ8",
+//     authDomain: "donorapp-dc0b7.firebaseapp.com",
+//     databaseURL: "https://donorapp-dc0b7.firebaseio.com",
+//     projectId: "donorapp-dc0b7",
+//     storageBucket: "donorapp-dc0b7.appspot.com",
+//     messagingSenderId: "386131022415"
+// }
 
-firebase.initializeApp(firebaseConfig)
+// firebase.initializeApp(firebaseConfig);
 
 export default class LoginScreen extends React.Component{
 
@@ -42,27 +44,25 @@ export default class LoginScreen extends React.Component{
         this.setState({password})
     }
 
-    signUpUser = (email, password) => {
 
-    }
-
-    loginUser = (email, password) => {
-        console.log(email)
-        console.log(password)
-        try {
-            firebase.auth().signInWithEmailAndPassword(email, password).then(function(user) {
-                console.log("Success")
-            })
-            this.props.navigation.navigate("Main")
-        }catch(error) {
-            console.log(error.toString())
-        }
-    }
+    // loginUser = (email, password) => {
+    //     console.log(email)
+    //     console.log(password)
+    //     try {
+    //         firebase.auth().signInWithEmailAndPassword(email, password).then(function(user) {
+    //             console.log("Success")
+    //         })
+    //         this.props.navigation.navigate("Main")
+    //     }catch(error) {
+    //         console.log(error.toString())
+    //     }
+    // }
 
 
     render(){
         return(
-        <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>    
+        <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>  
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>    
             <View style={styles.container}>
                 <ImageBackground
                     style={{
@@ -146,6 +146,7 @@ export default class LoginScreen extends React.Component{
                 </View>
             </ImageBackground>        
             </View>
+          </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
         );
     }

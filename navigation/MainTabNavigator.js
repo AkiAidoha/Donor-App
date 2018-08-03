@@ -9,23 +9,23 @@ import BloodScreen from '../screens/BloodScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import HistoryScreen from '../screens/HistoryScreen';
 
-const NewsStack = createStackNavigator({
-  News: NewsScreen,
-});
+// const NewsStack = createStackNavigator({
+//   News: NewsScreen,
+// });
 
-NewsStack.navigationOptions = {
-  tabBarLabel: 'Новости',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-home${focused ? '' : '-outline'}`
-          : 'md-home'
-      }
-    />
-  ),
-};
+// NewsStack.navigationOptions = {
+//   tabBarLabel: 'Новости',
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon
+//       focused={focused}
+//       name={
+//         Platform.OS === 'ios'
+//           ? `ios-home${focused ? '' : '-outline'}`
+//           : 'md-home'
+//       }
+//     />
+//   ),
+// };
 
 const AddressStack = createStackNavigator({
   Address: AddressScreen,
@@ -90,7 +90,7 @@ ProfileStack.navigationOptions = {
 
 
 export default createBottomTabNavigator({
-  NewsStack,
+  // NewsStack,
   AddressStack,
   BloodStack,
   HistoryStack,
