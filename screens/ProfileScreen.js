@@ -41,13 +41,12 @@ export default class ProfileScreen extends React.Component {
         this.inputRefs = {};
     
         this.state = {
-            persons: [],
             gender: '',
             name: '',
             height: '',
             weight: '',
             bdate: '',
-            city: undefined,
+            city: '',
             items: [
                 {
                     label: 'Астана',
@@ -163,46 +162,37 @@ export default class ProfileScreen extends React.Component {
         this.setState({name})
     }
 
-    /*
-    onPressAddPerson = () => {
-        if(this.state.name.trim() === ''){
-            alert("name is empty");
-            return;
+    writeUserData = () => {
+
+        const {name} = this.state
+        const {gender} = this.state
+        const {city} = this.state
+        const {height} = this.state
+        const {weight} = this.state
+        const {bdate} = this.state
+
+        const database = firebase.database()
+        const userRef = database.ref('users/')
+        if( name==='' && 
+            gender==='' && 
+            city==='' && 
+            height==='' && 
+            weight==='' && 
+            bdate==='' ){
+
+            Alert.alert("Введите все Ваши данные")
         }
-        personRef.push({
-            name: this.state.name
-        })    
-    }
-
-    componentDidMount() {
-        personRef.on('value', (childSnapShot) => {
-            const persons = [];
-            childSnapShot.forEach((doc)=> {
-                persons.push({
-                    key: doc.key,
-                    name: doc.toJSON().name
-                });
-                this.setState({
-                    persons: persons.sort((a,b)=>{
-                        return (a.name < b.name);
-                    })
-                })
-            });
-        });
-    }
-
-*/
-
-     writeUserData = () => {
-         const database = firebase.database()
-         const userRef = database.ref('users/')
-             let result = userRef.push({
-             username: this.state.name,
-             height: this.state.height,
-             weight: this.state.weight,
-             dob: this.state.bdate
-         })
-         Alert.alert("SUCCESS")
+        else{
+            let result = userRef.push({
+                username: this.state.name,
+                height: this.state.height,
+                weight: this.state.weight,
+                dob: this.state.bdate,
+                city: this.state.city,
+                gender: this.state.gender
+            })
+            Alert.alert("Вы успешно изменили свои данные")
+        }
     }
 
     render() {

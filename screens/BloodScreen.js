@@ -9,13 +9,14 @@ import {
     Keyboard, 
     ScrollView,
     Switch,
-    StyleSheet
+    Alert
 } from 'react-native';
 import styles from './Style';
 import SvgUri from 'react-native-svg-uri';
 import DatePicker from 'react-native-datepicker';
 import { KeyboardAvoidingView } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
+import firebase from '../FireBase/FireBase'
 
 export default class BloodScreen extends React.Component {
   static navigationOptions = {
@@ -25,7 +26,6 @@ export default class BloodScreen extends React.Component {
     },
     headerTintColor: '#fff',
     headerTitleStyle: {
-    //   fontFamily: 'Avenir Next',
       fontWeight: '500'
     },
   };
@@ -49,125 +49,71 @@ export default class BloodScreen extends React.Component {
         items: [
             {
                 label: 'Цельная кровь',
-                value: 'blood',
+                value: 'Цельная кровь',
             },
             {
                 label: 'Тромбоциты',
-                value: 'tromb',
+                value: 'Тромбоциты',
             },
             {
                 label: 'Плазма',
-                value: 'plasm',
+                value: 'Плазма',
             },
             {
                 label: 'Эритроциты',
-                value: 'erit',
+                value: 'Эритроциты',
             },
             {
                 label: 'Гранулоциты',
-                value: 'gran',
+                value: 'Гранулоциты',
             },
             {
                 label: 'Лейкоциты',
-                value: 'leic',
+                value: 'Лейкоциты',
             },
         ],
-        items2: [
-            {
-                label: 'Астана',
-                value: 'astana'
-            },
-            {
-                label: 'Алматы',
-                value: 'almaty'
-            },
-            {
-                label: 'Шымкент',
-                value: 'shymkent'
-            },
-            {
-                label: 'Караганды',
-                value: 'karagandy'
-            },
-            {
-                label: 'Актобе',
-                value: 'aktobe'
-            },
-            {
-                label: 'Тараз',
-                value: 'taraz'
-            },
-            {
-                label: 'Павлодар',
-                value: 'pavlodar'
-            },
-            {
-                label: 'Усть-Каменогорск',
-                value: 'oskemen'
-            },
-            {
-                label: 'Семей',
-                value: 'semey'
-            },
-            {
-                label: 'Уральск',
-                value: 'Oral'
-            },
-            {
-                label: 'Костанай',
-                value: 'kostanay'
-            },
-            {
-                label: 'Атырау',
-                value: 'atyrau'
-            },
-            {
-                label: 'Кызылорда',
-                value: 'kyzylorda'
-            },
-            {
-                label: 'Петропавловск',
-                value: 'piter'
-            },
-            {
-                label: 'Актау',
-                value: 'aktau'
-            },
-            {
-                label: 'Туркестан',
-                value: 'turkestan'
-            },
-            {
-                label: 'Темиртау',
-                value: 'temirtau'
-            },
-            {
-                label: 'Кокшетау',
-                value: 'kokshetau'
-            },
-            {
-                label: 'Талдыкорган',
-                value: 'taldykorgan'
-            },
-            {
-                label: 'Экибастуз',
-                value: 'ekibastuz'
-            },
-            {
-                label: 'Рудный',
-                value: 'rudnyi'
-            }
-        ]
+        
     };
 }
 
-  handleChangeDate = (bdate) => {
-    this.setState({bdate})
-  }
+    handleChangeDate = (bdate) => {
+        this.setState({bdate})
+    }
 
-  handleChangeValue = (value) => {
-    this.setState({value})
-  }
+    handleChangeValue = (value) => {
+        this.setState({value})
+    }
+
+    writeBloodData = () => {
+        const {bdate} = this.state
+        const {component} = this.state
+        const {value} = this.state
+
+        const database = firebase.database()
+        const userRef = database.ref('donation/')
+        if( 
+            bdate==='' && 
+            component==='' && 
+            value===''
+        ){
+
+            Alert.alert("Введите все Ваши данные")
+        }else{
+            let result = userRef.push({
+                bdate: this.state.bdate,
+                component: this.state.component,
+                value: this.state.value,
+                alcohol: this.state.switch1,
+                nuts: this.state.switch2,
+                seeds: this.state.switch3,
+                mayonnaise: this.state.switch4,
+                butter: this.state.switch5,
+                drinks: this.state.switch6
+            })
+            Alert.alert("Ваша донация успешно зарегистрирована!")
+        }  
+    }   
+
 
 
   render() {
@@ -229,10 +175,10 @@ export default class BloodScreen extends React.Component {
                                 value: null,
                             }}
 
-                            items={this.state.items}
-                            onValueChange={(value) => {
+                        items={this.state.items}
+                            onValueChange={(component) => {
                                 this.setState({
-                                    component: value,
+                                    component: component,
                                 });
                             }}
                             style={pickerSelectStyles}
@@ -262,37 +208,6 @@ export default class BloodScreen extends React.Component {
                                     value={this.state.value}
                                     onChangeText={this.handleChangeValue}
                                     underlineColorAndroid='transparent'
-                        />
-                    </View>
-                </View>
-
-
-                <View style={styles.inputRectangle}>
-                    <View style={styles.rectangleOne}>
-                        <SvgUri
-                            width="30"
-                            height="30"
-                            source={require('../assets/images/enterprise.svg')}
-                        />
-                    </View>
-                    <View style={styles.rectangleTwo}>
-                        <RNPickerSelect
-                            placeholder={{
-                                label: 'Ваш город',
-                                value: null,
-                            }}
-
-                            items={this.state.items2}
-                            onValueChange={(value) => {
-                                this.setState({
-                                    city: value,
-                                });
-                            }}
-                            style={pickerSelectStyles}
-                            value={this.state.city}
-                            ref={(el) => {
-                                this.inputRefs.picker2 = el;
-                            }}
                         />
                     </View>
                 </View>
@@ -393,6 +308,7 @@ export default class BloodScreen extends React.Component {
                 <View style={styles.submitView}>
                     <TouchableOpacity 
                         style={styles.submit}
+                        onPress={()=> this.writeBloodData()}
                         >
                         <Text style={styles.buttonText}>Сдать кровь</Text>        
                     </TouchableOpacity>

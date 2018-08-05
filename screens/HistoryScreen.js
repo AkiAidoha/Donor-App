@@ -1,7 +1,14 @@
 import React from 'react';
-import { View, StyleSheet,StatusBar, ScrollView } from 'react-native';
+import { View, StyleSheet,StatusBar, ScrollView,Text,TouchableOpacity } from 'react-native';
 import styles from './Style'
+import firebase from '../FireBase/FireBase'
 
+const list = readBloodData = () => {
+    let dateRef = firebase.database().ref('donation');
+    dateRef.on("child_added", function(snapshot) {
+        <Text>{snapshot.val().bdate}</Text>;
+      });
+}
 
 export default class HistoryScreen extends React.Component {
     static navigationOptions = {
@@ -11,12 +18,14 @@ export default class HistoryScreen extends React.Component {
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
-        // fontFamily: 'Avenir Next',
         fontWeight: '500'
         },
     };
 
-    render() {
+    
+
+    render() {  
+
         return (
             <ScrollView>
                 <View style={styles.container}>
@@ -24,8 +33,7 @@ export default class HistoryScreen extends React.Component {
                         backgroundColor="white"
                         barStyle="light-content"
                     />
-                    
-
+                    <Text>{list}</Text>
                 </View>
             </ScrollView>
         );
