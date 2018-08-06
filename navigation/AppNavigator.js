@@ -6,7 +6,7 @@ import RegistrationScreen from "../Auth/RegistrationScreen";
 import LoginScreen from '../Auth/LoginScreen';
 
 export default createSwitchNavigator({
-    Main: MainTabNavigator,
     Login: LoginScreen,
+    Main: MainTabNavigator,
     Registration: RegistrationScreen,
 });

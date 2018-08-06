@@ -161,7 +161,29 @@ export default class ProfileScreen extends React.Component {
         this.setState({name})
     }
 
+
+
+
     writeUserData = () => {
+        const database = firebase.database()
+        let user = firebase.auth().currentUser.uid;
+        const userRef = database.ref('users/')
+        let result = userRef.push({
+            username: this.state.name,
+            height: this.state.height,
+            weight: this.state.weight,
+            dob: this.state.bdate,
+            gender: this.state.gender,
+            city: this.state.city,
+            userId: user
+        })
+        Alert.alert("SUCCESS")
+        this.props.navigation.navigate("ShowProfile", {
+            newUser: result
+        })
+    }
+
+  /*  writeUserData = () => {
         const {name} = this.state
         const {gender} = this.state
         const {city} = this.state
@@ -192,7 +214,7 @@ export default class ProfileScreen extends React.Component {
             Alert.alert("Вы успешно изменили свои данные")
         }
     }
-
+*/
     render() {
 
         return (
@@ -361,7 +383,7 @@ export default class ProfileScreen extends React.Component {
                                 <View style={styles.submitView}>
                                     <TouchableOpacity 
                                         style={styles.submit}
-                                        onPress={() => this.props.navigation.navigate("ShowProfile", this.writeUserData())}
+                                        onPress={() => this.writeUserData()}
                                     >
                                         <Text style={styles.buttonText}>Изменить</Text>        
                                     </TouchableOpacity>

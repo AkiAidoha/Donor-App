@@ -14,7 +14,6 @@ import {
 } from 'react-native';
 import styles from './Style';
 import SvgUri from 'react-native-svg-uri';
-import DatePicker from 'react-native-datepicker';
 import { KeyboardAvoidingView } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import firebase from '../FireBase/FireBase'
@@ -47,6 +46,45 @@ export default class ProfileScreen extends React.Component {
     })
     };
 
+    state = {
+        user: {
+            "city": "CHOSE YOUR CITY",
+            "dob": "YOUR DATE OF BIRTH",
+            "gender": "GENDER",
+            "height": "HEIGHT",
+            "username": "AIDOHA_KOT_PROIDOHA",
+            "weight": "800",
+    }
+        }
+
+
+    fetchHandler = () => {
+        let user = firebase.auth().currentUser.uid;
+        firebase
+            .database()
+            .ref('users')
+            .orderByChild('userId')
+            .equalTo(user)
+            .once('value', snap => {
+                if(snap.val()) {
+                    this.setState({
+                        user: snap.val()[Object.keys(snap.val())[0]]
+                    })
+                }
+            });
+    }
+
+
+
+
+
+    componentDidMount = () => {
+        this.fetchHandler()
+    }
+
+    componentWillReceiveProps = () => {
+        this.fetchHandler()
+    }
     
 
     render() {
@@ -69,7 +107,8 @@ export default class ProfileScreen extends React.Component {
                                     /> 
                                 </View>    
                                 <Text style={styles.leftSide}>Имя: </Text>
-                                <Text style={styles.rightSide}>Передаешь что-то сюда</Text>
+
+                                <Text style={styles.rightSide}>{this.state.user.username}</Text>
                             </View>
                             <View style={styles.seperator2}>
                                 <View style={styles.userIcon}> 
@@ -80,7 +119,7 @@ export default class ProfileScreen extends React.Component {
                                     /> 
                                 </View> 
                                 <Text style={styles.leftSide}>Пол: </Text>
-                                <Text style={styles.rightSide}>Передаешь что-то сюда</Text>
+                                <Text style={styles.rightSide}>{this.state.user.gender}</Text>
                             </View>
                             <View style={styles.seperator2}>
                                 <View style={styles.userIcon}> 
@@ -91,7 +130,7 @@ export default class ProfileScreen extends React.Component {
                                     /> 
                                 </View> 
                                 <Text style={styles.leftSide}>Дата рождения: </Text>
-                                <Text style={styles.rightSide}>Передаешь что-то сюда</Text>
+                                <Text style={styles.rightSide}>{this.state.user.dob}</Text>
                             </View>
                             <View style={styles.seperator2}>
                                 <View style={styles.userIcon}> 
@@ -102,7 +141,7 @@ export default class ProfileScreen extends React.Component {
                                     /> 
                                 </View> 
                                 <Text style={styles.leftSide}>Рост: </Text>
-                                <Text style={styles.rightSide}>Передаешь что-то сюда</Text>
+                                <Text style={styles.rightSide}>{this.state.user.height}</Text>
                             </View>
                             <View style={styles.seperator2}>
                                 <View style={styles.userIcon}> 
@@ -113,7 +152,7 @@ export default class ProfileScreen extends React.Component {
                                     /> 
                                 </View> 
                                 <Text style={styles.leftSide}>Вес: </Text>
-                                <Text style={styles.rightSide}>Передаешь что-то сюда</Text>
+                                <Text style={styles.rightSide}>{this.state.user.weight}</Text>
                             </View>
                             <View style={styles.seperator2}>
                                 <View style={styles.userIcon}> 
@@ -124,7 +163,7 @@ export default class ProfileScreen extends React.Component {
                                     /> 
                                 </View> 
                                 <Text style={styles.leftSide}>Город: </Text>
-                                <Text style={styles.rightSide}>Передаешь что-то сюда</Text>
+                                <Text style={styles.rightSide}>{this.state.user.city}</Text>
                             </View>
                         </View>            
                     </ScrollView>
