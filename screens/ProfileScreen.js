@@ -162,7 +162,19 @@ export default class ProfileScreen extends React.Component {
     }
 
 
-
+    removeHandler = () => {
+        const database = firebase.database()
+        let user = firebase.auth().currentUser.uid;
+        let ref = firebase.database().ref('users');
+        ref
+            .orderByChild('userId')
+            .equalTo(user)
+            .once('value', snap => {
+                if(snap.val()) {
+                    ref.child(Object.keys(snap.val())[0]).remove()
+                }
+            });
+    }
 
     writeUserData = () => {
         const database = firebase.database()
@@ -216,7 +228,7 @@ export default class ProfileScreen extends React.Component {
     }
 */
     render() {
-
+        this.removeHandler()
         return (
             <KeyboardAvoidingView style={styles.container2} behavior="padding" enabled>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
