@@ -5,9 +5,9 @@ import firebase from '../FireBase/FireBase'
 
 const list = readBloodData = () => {
     let dateRef = firebase.database().ref('donation');
-    dateRef.on("child_added", function(snapshot) {
+    dateRef.on("child_added", (snapshot) => {
         <Text>{snapshot.val().bdate}</Text>;
-      });
+    });
 }
 
 export default class HistoryScreen extends React.Component {

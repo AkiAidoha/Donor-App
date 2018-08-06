@@ -30,7 +30,6 @@ export default class ProfileScreen extends React.Component {
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
-        // fontFamily: 'Avenir Next',
         fontWeight: '500'
         },
     };
@@ -163,7 +162,6 @@ export default class ProfileScreen extends React.Component {
     }
 
     writeUserData = () => {
-
         const {name} = this.state
         const {gender} = this.state
         const {city} = this.state
@@ -363,7 +361,7 @@ export default class ProfileScreen extends React.Component {
                                 <View style={styles.submitView}>
                                     <TouchableOpacity 
                                         style={styles.submit}
-                                        onPress={() => this.writeUserData()}
+                                        onPress={() => this.props.navigation.navigate("ShowProfile", this.writeUserData())}
                                     >
                                         <Text style={styles.buttonText}>Изменить</Text>        
                                     </TouchableOpacity>
