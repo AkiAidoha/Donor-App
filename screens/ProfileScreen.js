@@ -24,7 +24,7 @@ import firebase from '../FireBase/FireBase'
 export default class ProfileScreen extends React.Component {
     
     static navigationOptions = {
-        title: 'Мои данные',
+        title: 'Редактировать',
         headerStyle: {
         backgroundColor: '#40E0D0',
         },

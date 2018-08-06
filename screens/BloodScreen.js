@@ -140,7 +140,7 @@ export default class BloodScreen extends React.Component {
                         <DatePicker
                             date={this.state.bdate}
                             mode="date"
-                            placeholder="Дата кроводачи"
+                            placeholder="Дата донации"
                             format="YYYY-MM-DD"
                             showIcon = {false}
                             customStyles={{

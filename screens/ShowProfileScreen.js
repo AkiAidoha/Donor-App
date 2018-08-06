@@ -23,7 +23,8 @@ import firebase from '../FireBase/FireBase'
 
 export default class ProfileScreen extends React.Component {
     
-    static navigationOptions = {
+    static navigationOptions = ({navigation}) => {
+        return ({
         title: 'Мои данные',
         headerStyle: {
         backgroundColor: '#40E0D0',
@@ -32,8 +33,21 @@ export default class ProfileScreen extends React.Component {
         headerTitleStyle: {
         fontWeight: '500'
         },
-        headerLeft:null
+        headerLeft:null,
+        headerRight: (
+            <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+                <SvgUri
+                    width="30"
+                    height="30"
+                    style={styles.headerRight}
+                    source={require('../assets/images/edit.svg')}
+                />
+            </TouchableOpacity>
+        )
+    })
     };
+
+    
 
     render() {
 
@@ -41,28 +55,81 @@ export default class ProfileScreen extends React.Component {
             <KeyboardAvoidingView style={styles.container2} behavior="padding" enabled>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                     <ScrollView>
-                            <StatusBar
-                                backgroundColor="white"
-                                barStyle="light-content"
-                            />                  
+                        <StatusBar
+                            backgroundColor="white"
+                            barStyle="light-content"
+                        />      
+                        <View style={styles.userData}>
+                            <View style={styles.seperator}>
+                                <View style={styles.userIcon}> 
+                                    <SvgUri
+                                        width="30"
+                                        height="30"
+                                        source={require('../assets/images/profile.svg')}
+                                    /> 
+                                </View>    
+                                <Text style={styles.leftSide}>Имя: </Text>
+                                <Text style={styles.rightSide}>Передаешь что-то сюда</Text>
+                            </View>
+                            <View style={styles.seperator2}>
+                                <View style={styles.userIcon}> 
+                                    <SvgUri
+                                        width="30"
+                                        height="30"
+                                        source={require('../assets/images/genderBlack.svg')}
+                                    /> 
+                                </View> 
+                                <Text style={styles.leftSide}>Пол: </Text>
+                                <Text style={styles.rightSide}>Передаешь что-то сюда</Text>
+                            </View>
+                            <View style={styles.seperator2}>
+                                <View style={styles.userIcon}> 
+                                    <SvgUri
+                                        width="30"
+                                        height="30"
+                                        source={require('../assets/images/calendarBlack.svg')}
+                                    /> 
+                                </View> 
+                                <Text style={styles.leftSide}>Дата рождения: </Text>
+                                <Text style={styles.rightSide}>Передаешь что-то сюда</Text>
+                            </View>
+                            <View style={styles.seperator2}>
+                                <View style={styles.userIcon}> 
+                                    <SvgUri
+                                        width="30"
+                                        height="30"
+                                        source={require('../assets/images/heightBlack.svg')}
+                                    /> 
+                                </View> 
+                                <Text style={styles.leftSide}>Рост: </Text>
+                                <Text style={styles.rightSide}>Передаешь что-то сюда</Text>
+                            </View>
+                            <View style={styles.seperator2}>
+                                <View style={styles.userIcon}> 
+                                    <SvgUri
+                                        width="30"
+                                        height="30"
+                                        source={require('../assets/images/weightBlack.svg')}
+                                    /> 
+                                </View> 
+                                <Text style={styles.leftSide}>Вес: </Text>
+                                <Text style={styles.rightSide}>Передаешь что-то сюда</Text>
+                            </View>
+                            <View style={styles.seperator2}>
+                                <View style={styles.userIcon}> 
+                                    <SvgUri
+                                        width="30"
+                                        height="30"
+                                        source={require('../assets/images/enterpriseBlack.svg')}
+                                    /> 
+                                </View> 
+                                <Text style={styles.leftSide}>Город: </Text>
+                                <Text style={styles.rightSide}>Передаешь что-то сюда</Text>
+                            </View>
+                        </View>            
                     </ScrollView>
                 </TouchableWithoutFeedback>
             </KeyboardAvoidingView>
           );
     }
 }
-
-const pickerSelectStyles = {
-    inputIOS: {
-        fontSize: 16,
-        paddingTop: 13,
-        paddingHorizontal: 10,
-        paddingBottom: 12,
-        borderBottomRightRadius: 20,
-        borderTopRightRadius: 20,
-        color: 'white',
-        paddingLeft: 20
-    },
-    placeholderColor: 'white',
-    
-};

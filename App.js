@@ -60,6 +60,14 @@ export default class App extends React.Component {
         require('./assets/images/mayonnaise.svg'),
         require('./assets/images/can.svg'),
         require('./assets/images/gender.svg'),
+        require('./assets/images/edit.svg'),
+        require('./assets/images/profile.svg'),
+        require('./assets/images/enterpriseBlack.svg'),
+        require('./assets/images/calendarBlack.svg'),
+        require('./assets/images/genderBlack.svg'),
+        require('./assets/images/heightBlack.svg'),
+        require('./assets/images/weightBlack.svg'),
+        
       ]),
       Font.loadAsync({
         ...Icon.Ionicons.font,

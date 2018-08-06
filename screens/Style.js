@@ -155,6 +155,49 @@ const Style = StyleSheet.create({
     formTitle:{
         fontSize: 30,
         paddingBottom: 20
+    },
+    headerRight:{
+        paddingRight: 10
+    },
+    userData:{
+        justifyContent: 'center', 
+        alignItems: 'center',
+    },
+    leftSide:{
+        fontSize: 15
+    },
+    rightSide:{
+        marginRight:'auto',
+        fontSize: 15
+    },
+    historyList:{
+        alignItems: 'center',
+        width:'100%',
+        marginTop: 20,
+        backgroundColor:'#fff'
+    },
+    leftDateHistory:{
+        width: '50%'
+    },
+    rightDateHistory:{
+        marginLeft:'auto'
+    },
+    containerHistory:{
+        flex: 1,
+        justifyContent:'flex-start',
+        alignItems: 'center',
+        backgroundColor:'#fff'
+    },
+    delete:{
+        backgroundColor:'#ff0c0c',
+        borderRadius: 20,
+        width: '100%',
+        height: 50,
+        justifyContent: 'center', 
+        alignItems: 'center',
+    },
+    userIcon:{
+        width: '10%'
     }
 });
 
