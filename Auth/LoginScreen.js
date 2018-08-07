@@ -10,7 +10,8 @@ import {
     View,
     StatusBar,
     TouchableWithoutFeedback,
-    Keyboard
+    Keyboard,
+    Alert
 } from 'react-native';
 
 import SvgUri from 'react-native-svg-uri';
@@ -34,16 +35,21 @@ export default class LoginScreen extends React.Component{
 
 
     loginUser = (email, password) => {
-        console.log(email)
-        console.log(password)
-        try {
-            firebase.auth().signInWithEmailAndPassword(email, password).then(function(user) {
-                console.log("Success")
-            })
-            this.props.navigation.navigate("Main")
-        }catch(error) {
-            console.log(error.toString())
+        // console.log(email)
+        // console.log(password)
+        if(email === '' && password === ''){
+            Alert.alert("Введите все Ваши данные");
+        }else{
+            try {
+                firebase.auth().signInWithEmailAndPassword(email, password).then(function(user) {
+                    console.log("Success")
+                })
+                this.props.navigation.navigate("Main")
+            }catch(error) {
+                console.log(error.toString())
+            }
         }
+        
     }
 
 

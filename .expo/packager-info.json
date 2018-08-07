@@ -3,7 +3,7 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerNgrokUrl": "https://es-b4w.aidooha.donor-app.exp.direct",
+  "packagerNgrokUrl": "https://packager.es-b4w.aidooha.donor-app.exp.direct",
+  "ngrokPid": 82722
 }
