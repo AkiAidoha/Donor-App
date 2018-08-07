@@ -134,7 +134,7 @@ const Style = StyleSheet.create({
     },
     title:{
         marginRight: 'auto',
-        fontSize: 20
+        fontSize: 16
     },
     svg:{
         width: '20%'
@@ -164,7 +164,8 @@ const Style = StyleSheet.create({
         alignItems: 'center',
     },
     leftSide:{
-        fontSize: 15
+        fontSize: 15,
+        fontWeight: '700'
     },
     rightSide:{
         marginRight:'auto',
@@ -198,7 +199,7 @@ const Style = StyleSheet.create({
     },
     userIcon:{
         width: '10%'
-    }
+    },
 });
 
 export default Style;

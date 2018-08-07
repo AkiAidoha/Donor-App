@@ -48,14 +48,14 @@ export default class ProfileScreen extends React.Component {
 
     state = {
         user: {
-            "city": "CHOSE YOUR CITY",
-            "dob": "YOUR DATE OF BIRTH",
-            "gender": "GENDER",
-            "height": "HEIGHT",
-            "username": "AIDOHA_KOT_PROIDOHA",
-            "weight": "800",
-    }
+            "city": "",
+            "dob": "",
+            "gender": "",
+            "height": "",
+            "username": "",
+            "weight": "",
         }
+    }
 
 
     fetchHandler = () => {
@@ -73,9 +73,6 @@ export default class ProfileScreen extends React.Component {
                 }
             });
     }
-
-
-
 
 
     componentDidMount = () => {

@@ -94,7 +94,7 @@ export default class BloodScreen extends React.Component {
         if( 
             bdate==='' && 
             component==='' && 
-            value===''
+            value==='' 
         ){
 
             Alert.alert("Введите все Ваши данные")

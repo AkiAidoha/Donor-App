@@ -49,97 +49,97 @@ export default class ProfileScreen extends React.Component {
             items: [
                 {
                     label: 'Астана',
-                    value: 'astana'
+                    value: 'Астана'
                 },
                 {
                     label: 'Алматы',
-                    value: 'almaty'
+                    value: 'Алматы'
                 },
                 {
                     label: 'Шымкент',
-                    value: 'shymkent'
+                    value: 'Шымкент'
                 },
                 {
                     label: 'Караганды',
-                    value: 'karagandy'
+                    value: 'Караганды'
                 },
                 {
                     label: 'Актобе',
-                    value: 'aktobe'
+                    value: 'Актобе'
                 },
                 {
                     label: 'Тараз',
-                    value: 'taraz'
+                    value: 'Тараз'
                 },
                 {
                     label: 'Павлодар',
-                    value: 'pavlodar'
+                    value: 'Павлодар'
                 },
                 {
                     label: 'Усть-Каменогорск',
-                    value: 'oskemen'
+                    value: 'Усть-Каменогорск'
                 },
                 {
                     label: 'Семей',
-                    value: 'semey'
+                    value: 'Семей'
                 },
                 {
                     label: 'Уральск',
-                    value: 'Oral'
+                    value: 'Уральск'
                 },
                 {
                     label: 'Костанай',
-                    value: 'kostanay'
+                    value: 'Костанай'
                 },
                 {
                     label: 'Атырау',
-                    value: 'atyrau'
+                    value: 'Атырау'
                 },
                 {
                     label: 'Кызылорда',
-                    value: 'kyzylorda'
+                    value: 'Кызылорда'
                 },
                 {
                     label: 'Петропавловск',
-                    value: 'piter'
+                    value: 'Петропавловск'
                 },
                 {
                     label: 'Актау',
-                    value: 'aktau'
+                    value: 'Актау'
                 },
                 {
                     label: 'Туркестан',
-                    value: 'turkestan'
+                    value: 'Туркестан'
                 },
                 {
                     label: 'Темиртау',
-                    value: 'temirtau'
+                    value: 'Темиртау'
                 },
                 {
                     label: 'Кокшетау',
-                    value: 'kokshetau'
+                    value: 'Кокшетау'
                 },
                 {
                     label: 'Талдыкорган',
-                    value: 'taldykorgan'
+                    value: 'Талдыкорган'
                 },
                 {
                     label: 'Экибастуз',
-                    value: 'ekibastuz'
+                    value: 'Экибастуз'
                 },
                 {
                     label: 'Рудный',
-                    value: 'rudnyi'
+                    value: 'Рудный'
                 }
             ],
             items2: [
                 {
                     label: 'Мужской',
-                    value: 'male'
+                    value: 'Мужской'
                 },
                 {
                     label: 'Женский',
-                    value: 'female'
+                    value: 'Женский'
                 }
             ]
         };
@@ -177,25 +177,6 @@ export default class ProfileScreen extends React.Component {
     }
 
     writeUserData = () => {
-        const database = firebase.database()
-        let user = firebase.auth().currentUser.uid;
-        const userRef = database.ref('users/')
-        let result = userRef.push({
-            username: this.state.name,
-            height: this.state.height,
-            weight: this.state.weight,
-            dob: this.state.bdate,
-            gender: this.state.gender,
-            city: this.state.city,
-            userId: user
-        })
-        Alert.alert("SUCCESS")
-        this.props.navigation.navigate("ShowProfile", {
-            newUser: result
-        })
-    }
-
-  /*  writeUserData = () => {
         const {name} = this.state
         const {gender} = this.state
         const {city} = this.state
@@ -204,6 +185,7 @@ export default class ProfileScreen extends React.Component {
         const {bdate} = this.state
 
         const database = firebase.database()
+        let user = firebase.auth().currentUser.uid;
         const userRef = database.ref('users/')
         if( name==='' && 
             gender==='' && 
@@ -213,20 +195,27 @@ export default class ProfileScreen extends React.Component {
             bdate==='' ){
 
             Alert.alert("Введите все Ваши данные")
-        }
-        else{
+        }else if(weight < 50){
+            Alert.alert("Ваш вес меньше чем 50кг, к сожалению вы не можете быть донором")
+        }else{
             let result = userRef.push({
                 username: this.state.name,
                 height: this.state.height,
                 weight: this.state.weight,
                 dob: this.state.bdate,
+                gender: this.state.gender,
                 city: this.state.city,
-                gender: this.state.gender
+                userId: user
             })
             Alert.alert("Вы успешно изменили свои данные")
+            this.props.navigation.navigate("ShowProfile", {
+                newUser: result
+            })
         }
+        
     }
-*/
+
+
     render() {
         this.removeHandler()
         return (
@@ -248,12 +237,13 @@ export default class ProfileScreen extends React.Component {
                                         />
                                     </View>
                                     <View style={styles.rectangleTwo}>
-                                        <TextInput  placeholder={"ФИО"} 
-                                                    style={styles.textinput}
-                                                    placeholderTextColor="white"
-                                                    value={this.state.name}
-                                                    onChangeText={this.handleName}
-                                                    underlineColorAndroid='transparent'
+                                        <TextInput
+                                            placeholder={"ФИО"} 
+                                            style={styles.textinput}
+                                            placeholderTextColor="white"
+                                            value={this.state.name}
+                                            onChangeText={this.handleName}
+                                            underlineColorAndroid='transparent'
                                         />  
                                     </View> 
                                 </View>
